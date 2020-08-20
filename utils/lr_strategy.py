@@ -46,6 +46,16 @@ class CyclicalScheduler(keras.callbacks.Callback):
     callbacks = [cyclical_learning_rate]
     model.fit(....
             callbacks=callbacks)
+    学习率可视化保存到本地
+    import matplotlib.pyplot as plt
+    plt.plot(cyclical_learning_rate.learning_rates)
+    plt.xlabel('Step', fontsize=20)
+    plt.ylabel('lr', fontsize=20)
+    plt.axis([0, args.final_epoch, 0, LR_MAX*1.1])
+    plt.xticks(np.arange(0, args.final_epoch, 1))
+    plt.grid()
+    plt.title('Cyclical Cosine Annealing', fontsize=20)
+    plt.savefig('./cyclical.png')
     """
     def __init__(self, lrate_max,
                  lrate_min,
